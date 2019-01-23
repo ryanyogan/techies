@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
   meetups: [Meetup!]!
   meetup(id: ID!): Meetup!
@@ -28,4 +30,14 @@ type User {
   name: String!
   myMeetups: [Meetup!]!
   meetupsAttending: [Meetup!]!
+}
+
+type Meetup {
+  id: ID!
+  organizer: User!
+  title: String!
+  description: String!
+  location: String!
+  date: DateTime!
+  attendees: [User!]!
 }

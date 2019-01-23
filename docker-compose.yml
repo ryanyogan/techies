@@ -7,24 +7,25 @@ services:
       - "4466:4466"
     environment:
       PRISMA_CONFIG: |
+        managementApiSecret: foobar123123
         port: 4466
         databases:
           default:
-            connector: postgres
-            host: postgres
-            port: 5432
-            user: prisma
+            connector: mysql
+            host: mysql
+            user: root
             password: prisma
             migrations: true
+            rawAccess: true
+            port: 3306
 
-  postgres:
-    image: postgres:10.5
+  mysql:
+    image: mysql:5.7
     restart: always
     environment:
-      POSTGRES_USER: prisma
-      POSTGRES_PASSWORD: prisma
+      MYSQL_ROOT_PASSWORD: prisma
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - mysql:/var/lib/mysql
 
 volumes:
-  postgres:
+  mysql:
