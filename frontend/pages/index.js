@@ -1,11 +1,12 @@
 import React from 'react';
 import Layout from '../components/Layout';
+import MeetupList from '../components/MeetupList';
 
 export default class Index extends React.Component {
   render() {
     return (
       <Layout>
-        <div>I work now...</div>
+        <MeetupList />
       </Layout>
     );
   }
