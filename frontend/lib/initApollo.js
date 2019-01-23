@@ -5,36 +5,39 @@ import fetch from 'isomorphic-unfetch';
 
 let apolloClient = null;
 
-// Pollyfill fetch on the server (SSR)
+// Polyfill fetch() on the server (used by apollo-client)
 if (!process.browser) {
   global.fetch = fetch;
 }
 
-const create = (initialState, { getToken }) => {
+function create(initialState, { getToken }) {
   const httpLink = createHttpLink({
-    uri: 'https://us1.prisma.sh/ryan-yogan/techies/dev', // @fixme ENV var
+    uri: 'http://localhost:4000',
     credentials: 'same-origin',
   });
 
   const authLink = setContext((_, { headers }) => {
     const token = getToken();
     return {
-      ...headers,
-      Authorization: token ? `Bearer ${token}` : '',
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
     };
   });
 
+  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     connectToDevTools: process.browser,
-    ssrMode: !process.browser, // Disable force-fetch on server
+    ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
     link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState || {}),
   });
-};
+}
 
-export default (initialState, options) => {
-  // We will make a new client for every SSR so the data
-  // is not shared between connections.
+export default function initApollo(initialState, options) {
+  // Make sure to create a new client for every server-side request so that data
+  // isn't shared between connections (which would be bad)
   if (!process.browser) {
     return create(initialState, options);
   }
@@ -43,4 +46,6 @@ export default (initialState, options) => {
   if (!apolloClient) {
     apolloClient = create(initialState, options);
   }
-};
+
+  return apolloClient;
+}
