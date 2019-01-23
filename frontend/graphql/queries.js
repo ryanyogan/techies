@@ -16,3 +16,32 @@ export const MEETUPS_QUERY = gql`
     }
   }
 `;
+
+export const ME_QUERY = gql`
+  query ME_QUERY {
+    me {
+      id
+      name
+      myMeetups {
+        id
+        title
+        date
+        location
+        attendees {
+          id
+        }
+      }
+      meetupsAttending {
+        id
+        title
+        location
+        organizer {
+          name
+        }
+        attendees {
+          id
+        }
+      }
+    }
+  }
+`;
