@@ -1,5 +1,4 @@
-module.exports = {
-        typeDefs: /* GraphQL */ `type AggregateMeetup {
+export const typeDefs = /* GraphQL */ `type AggregateMeetup {
   count: Int!
 }
 
@@ -697,5 +696,3 @@ input UserWhereUniqueInput {
   email: String
 }
 `
-      }
-    

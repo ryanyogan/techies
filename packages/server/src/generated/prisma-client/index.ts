@@ -38,51 +38,43 @@ export interface Prisma {
    */
 
   meetup: (where: MeetupWhereUniqueInput) => MeetupPromise;
-  meetups: (
-    args?: {
-      where?: MeetupWhereInput;
-      orderBy?: MeetupOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<Meetup>;
-  meetupsConnection: (
-    args?: {
-      where?: MeetupWhereInput;
-      orderBy?: MeetupOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => MeetupConnectionPromise;
+  meetups: (args?: {
+    where?: MeetupWhereInput;
+    orderBy?: MeetupOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Meetup>;
+  meetupsConnection: (args?: {
+    where?: MeetupWhereInput;
+    orderBy?: MeetupOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MeetupConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
-  users: (
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => FragmentableArray<User>;
-  usersConnection: (
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => UserConnectionPromise;
+  users: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<User>;
+  usersConnection: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => UserConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
@@ -90,35 +82,35 @@ export interface Prisma {
    */
 
   createMeetup: (data: MeetupCreateInput) => MeetupPromise;
-  updateMeetup: (
-    args: { data: MeetupUpdateInput; where: MeetupWhereUniqueInput }
-  ) => MeetupPromise;
-  updateManyMeetups: (
-    args: { data: MeetupUpdateManyMutationInput; where?: MeetupWhereInput }
-  ) => BatchPayloadPromise;
-  upsertMeetup: (
-    args: {
-      where: MeetupWhereUniqueInput;
-      create: MeetupCreateInput;
-      update: MeetupUpdateInput;
-    }
-  ) => MeetupPromise;
+  updateMeetup: (args: {
+    data: MeetupUpdateInput;
+    where: MeetupWhereUniqueInput;
+  }) => MeetupPromise;
+  updateManyMeetups: (args: {
+    data: MeetupUpdateManyMutationInput;
+    where?: MeetupWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMeetup: (args: {
+    where: MeetupWhereUniqueInput;
+    create: MeetupCreateInput;
+    update: MeetupUpdateInput;
+  }) => MeetupPromise;
   deleteMeetup: (where: MeetupWhereUniqueInput) => MeetupPromise;
   deleteManyMeetups: (where?: MeetupWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
-  updateUser: (
-    args: { data: UserUpdateInput; where: UserWhereUniqueInput }
-  ) => UserPromise;
-  updateManyUsers: (
-    args: { data: UserUpdateManyMutationInput; where?: UserWhereInput }
-  ) => BatchPayloadPromise;
-  upsertUser: (
-    args: {
-      where: UserWhereUniqueInput;
-      create: UserCreateInput;
-      update: UserUpdateInput;
-    }
-  ) => UserPromise;
+  updateUser: (args: {
+    data: UserUpdateInput;
+    where: UserWhereUniqueInput;
+  }) => UserPromise;
+  updateManyUsers: (args: {
+    data: UserUpdateManyMutationInput;
+    where?: UserWhereInput;
+  }) => BatchPayloadPromise;
+  upsertUser: (args: {
+    where: UserWhereUniqueInput;
+    create: UserCreateInput;
+    update: UserUpdateInput;
+  }) => UserPromise;
   deleteUser: (where: UserWhereUniqueInput) => UserPromise;
   deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
 
@@ -880,17 +872,15 @@ export interface MeetupPromise extends Promise<Meetup>, Fragmentable {
   description: () => Promise<String>;
   location: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
-  attendees: <T = FragmentableArray<User>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  attendees: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface MeetupSubscription
@@ -902,17 +892,15 @@ export interface MeetupSubscription
   description: () => Promise<AsyncIterator<String>>;
   location: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
-  attendees: <T = Promise<AsyncIterator<UserSubscription>>>(
-    args?: {
-      where?: UserWhereInput;
-      orderBy?: UserOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  attendees: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface User {
@@ -927,28 +915,24 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   email: () => Promise<String>;
   password: () => Promise<String>;
   name: () => Promise<String>;
-  myMeetups: <T = FragmentableArray<Meetup>>(
-    args?: {
-      where?: MeetupWhereInput;
-      orderBy?: MeetupOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  meetupsAttending: <T = FragmentableArray<Meetup>>(
-    args?: {
-      where?: MeetupWhereInput;
-      orderBy?: MeetupOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  myMeetups: <T = FragmentableArray<Meetup>>(args?: {
+    where?: MeetupWhereInput;
+    orderBy?: MeetupOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  meetupsAttending: <T = FragmentableArray<Meetup>>(args?: {
+    where?: MeetupWhereInput;
+    orderBy?: MeetupOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface UserSubscription
@@ -958,28 +942,24 @@ export interface UserSubscription
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
-  myMeetups: <T = Promise<AsyncIterator<MeetupSubscription>>>(
-    args?: {
-      where?: MeetupWhereInput;
-      orderBy?: MeetupOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-  meetupsAttending: <T = Promise<AsyncIterator<MeetupSubscription>>>(
-    args?: {
-      where?: MeetupWhereInput;
-      orderBy?: MeetupOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  myMeetups: <T = Promise<AsyncIterator<MeetupSubscription>>>(args?: {
+    where?: MeetupWhereInput;
+    orderBy?: MeetupOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  meetupsAttending: <T = Promise<AsyncIterator<MeetupSubscription>>>(args?: {
+    where?: MeetupWhereInput;
+    orderBy?: MeetupOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface MeetupConnection {
@@ -1164,4 +1144,9 @@ export const models: Model[] = [
  * Type Defs
  */
 
-export const prisma: Prisma;
+export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
+  typeDefs,
+  models,
+  endpoint: `https://us1.prisma.sh/ryan-yogan/techies/dev`
+});
+export const prisma = new Prisma();

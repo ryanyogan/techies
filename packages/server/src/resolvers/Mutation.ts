@@ -1,6 +1,36 @@
-const { getUserId } = require('../../utils');
+import * as bcrypt from "bcryptjs";
+import * as jwt from "jsonwebtoken";
+import { MutationResolvers } from "../generated/graphqlgen";
+import { getUserId } from "../utils";
 
-const meetup = {
+export const Mutation: MutationResolvers.Type = {
+  ...MutationResolvers.defaultResolvers,
+
+  async signup(_, args, context) {
+    const password = await bcrypt.hash(args.password, 10);
+    const user = await context.prisma.createUser({ ...args, password });
+
+    return {
+      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET as any),
+      user,
+    };
+  },
+
+  async login(_, { email, password }, context) {
+    const user = await context.prisma.user({ email });
+    if (!user) {
+      throw new Error(`No user found for email: ${email}`);
+    }
+    const passwordValid = await bcrypt.compare(password, user.password);
+    if (!passwordValid) {
+      throw new Error("Invalid password");
+    }
+    return {
+      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET as any),
+      user,
+    };
+  },
+
   async createMeetup(_, { title, description, date, location }, ctx) {
     const userId = getUserId(ctx);
     return ctx.prisma.createMeetup({
@@ -19,6 +49,7 @@ const meetup = {
     const meetupExists = await context.prisma.$exists.meetup({
       id,
     });
+
     if (!meetupExists) {
       throw new Error(`Sorry, meetup not found!`);
     }
@@ -56,5 +87,3 @@ const meetup = {
     });
   },
 };
-
-module.exports = { meetup };
