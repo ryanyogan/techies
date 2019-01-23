@@ -1,20 +1,20 @@
 type Query {
-  feed: [Post!]!
-  drafts: [Post!]!
-  post(id: ID!): Post
+  meetups: [Meetup!]!
+  meetup(id: ID!): Meetup!
   me: User
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  createDraft(title: String!, content: String!): Post!
-  publish(id: ID!): Post!
-  deletePost(id: ID!): Post!
-}
-
-type Subscription {
-  feedSubscription: Post
+  createMeetup(
+    title: String!
+    description: String!
+    date: DateTime!
+    location: String!
+  ): Meetup!
+  attending(id: ID!): Meetup!
+  notAttending(id: ID!): Meetup!
 }
 
 type AuthPayload {
@@ -26,13 +26,6 @@ type User {
   id: ID!
   email: String!
   name: String!
-  posts: [Post!]!
-}
-
-type Post {
-  id: ID!
-  published: Boolean!
-  title: String!
-  content: String!
-  author: User!
+  myMeetups: [Meetup!]!
+  meetupsAttending: [Meetup!]!
 }

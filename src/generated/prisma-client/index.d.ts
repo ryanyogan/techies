@@ -14,7 +14,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
 
 export interface Exists {
-  post: (where?: PostWhereInput) => Promise<boolean>;
+  meetup: (where?: MeetupWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -37,29 +37,29 @@ export interface Prisma {
    * Queries
    */
 
-  post: (where: PostWhereUniqueInput) => PostPromise;
-  posts: (
+  meetup: (where: MeetupWhereUniqueInput) => MeetupPromise;
+  meetups: (
     args?: {
-      where?: PostWhereInput;
-      orderBy?: PostOrderByInput;
+      where?: MeetupWhereInput;
+      orderBy?: MeetupOrderByInput;
       skip?: Int;
       after?: String;
       before?: String;
       first?: Int;
       last?: Int;
     }
-  ) => FragmentableArray<Post>;
-  postsConnection: (
+  ) => FragmentableArray<Meetup>;
+  meetupsConnection: (
     args?: {
-      where?: PostWhereInput;
-      orderBy?: PostOrderByInput;
+      where?: MeetupWhereInput;
+      orderBy?: MeetupOrderByInput;
       skip?: Int;
       after?: String;
       before?: String;
       first?: Int;
       last?: Int;
     }
-  ) => PostConnectionPromise;
+  ) => MeetupConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
   users: (
     args?: {
@@ -89,22 +89,22 @@ export interface Prisma {
    * Mutations
    */
 
-  createPost: (data: PostCreateInput) => PostPromise;
-  updatePost: (
-    args: { data: PostUpdateInput; where: PostWhereUniqueInput }
-  ) => PostPromise;
-  updateManyPosts: (
-    args: { data: PostUpdateManyMutationInput; where?: PostWhereInput }
+  createMeetup: (data: MeetupCreateInput) => MeetupPromise;
+  updateMeetup: (
+    args: { data: MeetupUpdateInput; where: MeetupWhereUniqueInput }
+  ) => MeetupPromise;
+  updateManyMeetups: (
+    args: { data: MeetupUpdateManyMutationInput; where?: MeetupWhereInput }
   ) => BatchPayloadPromise;
-  upsertPost: (
+  upsertMeetup: (
     args: {
-      where: PostWhereUniqueInput;
-      create: PostCreateInput;
-      update: PostUpdateInput;
+      where: MeetupWhereUniqueInput;
+      create: MeetupCreateInput;
+      update: MeetupUpdateInput;
     }
-  ) => PostPromise;
-  deletePost: (where: PostWhereUniqueInput) => PostPromise;
-  deleteManyPosts: (where?: PostWhereInput) => BatchPayloadPromise;
+  ) => MeetupPromise;
+  deleteMeetup: (where: MeetupWhereUniqueInput) => MeetupPromise;
+  deleteManyMeetups: (where?: MeetupWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (
     args: { data: UserUpdateInput; where: UserWhereUniqueInput }
@@ -130,9 +130,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  post: (
-    where?: PostSubscriptionWhereInput
-  ) => PostSubscriptionPayloadSubscription;
+  meetup: (
+    where?: MeetupSubscriptionWhereInput
+  ) => MeetupSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -146,19 +146,21 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type PostOrderByInput =
+export type MeetupOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "location_ASC"
+  | "location_DESC"
+  | "date_ASC"
+  | "date_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "published_ASC"
-  | "published_DESC"
-  | "title_ASC"
-  | "title_DESC"
-  | "content_ASC"
-  | "content_DESC";
+  | "updatedAt_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -176,49 +178,274 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateOneRequiredWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput;
-  update?: UserUpdateWithoutPostsDataInput;
-  upsert?: UserUpsertWithoutPostsInput;
-  connect?: UserWhereUniqueInput;
+export interface UserUpdateWithoutMyMeetupsDataInput {
+  email?: String;
+  password?: String;
+  name?: String;
+  meetupsAttending?: MeetupUpdateManyWithoutAttendeesInput;
 }
 
-export type PostWhereUniqueInput = AtLeastOne<{
+export type MeetupWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput;
-  data: PostUpdateWithoutAuthorDataInput;
+export interface MeetupUpdateWithoutAttendeesDataInput {
+  organizer?: UserUpdateOneRequiredWithoutMyMeetupsInput;
+  title?: String;
+  description?: String;
+  location?: String;
+  date?: DateTimeInput;
 }
 
-export interface UserCreateInput {
+export interface MeetupWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  organizer?: UserWhereInput;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
+  location?: String;
+  location_not?: String;
+  location_in?: String[] | String;
+  location_not_in?: String[] | String;
+  location_lt?: String;
+  location_lte?: String;
+  location_gt?: String;
+  location_gte?: String;
+  location_contains?: String;
+  location_not_contains?: String;
+  location_starts_with?: String;
+  location_not_starts_with?: String;
+  location_ends_with?: String;
+  location_not_ends_with?: String;
+  date?: DateTimeInput;
+  date_not?: DateTimeInput;
+  date_in?: DateTimeInput[] | DateTimeInput;
+  date_not_in?: DateTimeInput[] | DateTimeInput;
+  date_lt?: DateTimeInput;
+  date_lte?: DateTimeInput;
+  date_gt?: DateTimeInput;
+  date_gte?: DateTimeInput;
+  attendees_every?: UserWhereInput;
+  attendees_some?: UserWhereInput;
+  attendees_none?: UserWhereInput;
+  AND?: MeetupWhereInput[] | MeetupWhereInput;
+  OR?: MeetupWhereInput[] | MeetupWhereInput;
+  NOT?: MeetupWhereInput[] | MeetupWhereInput;
+}
+
+export interface UserCreateWithoutMeetupsAttendingInput {
   email: String;
   password: String;
   name: String;
-  posts?: PostCreateManyWithoutAuthorInput;
+  myMeetups?: MeetupCreateManyWithoutOrganizerInput;
 }
 
-export interface PostUpdateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
-  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput;
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
-  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
+export interface MeetupUpdateWithWhereUniqueWithoutOrganizerInput {
+  where: MeetupWhereUniqueInput;
+  data: MeetupUpdateWithoutOrganizerDataInput;
+}
+
+export interface MeetupCreateManyWithoutOrganizerInput {
+  create?:
+    | MeetupCreateWithoutOrganizerInput[]
+    | MeetupCreateWithoutOrganizerInput;
+  connect?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
+}
+
+export interface MeetupUpsertWithWhereUniqueWithoutAttendeesInput {
+  where: MeetupWhereUniqueInput;
+  update: MeetupUpdateWithoutAttendeesDataInput;
+  create: MeetupCreateWithoutAttendeesInput;
+}
+
+export interface MeetupCreateWithoutOrganizerInput {
+  title: String;
+  description: String;
+  location: String;
+  date: DateTimeInput;
+  attendees?: UserCreateManyWithoutMeetupsAttendingInput;
+}
+
+export interface MeetupSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: MeetupWhereInput;
+  AND?: MeetupSubscriptionWhereInput[] | MeetupSubscriptionWhereInput;
+  OR?: MeetupSubscriptionWhereInput[] | MeetupSubscriptionWhereInput;
+  NOT?: MeetupSubscriptionWhereInput[] | MeetupSubscriptionWhereInput;
+}
+
+export interface MeetupUpdateInput {
+  organizer?: UserUpdateOneRequiredWithoutMyMeetupsInput;
+  title?: String;
+  description?: String;
+  location?: String;
+  date?: DateTimeInput;
+  attendees?: UserUpdateManyWithoutMeetupsAttendingInput;
+}
+
+export interface UserUpdateInput {
+  email?: String;
+  password?: String;
+  name?: String;
+  myMeetups?: MeetupUpdateManyWithoutOrganizerInput;
+  meetupsAttending?: MeetupUpdateManyWithoutAttendeesInput;
+}
+
+export interface UserUpdateOneRequiredWithoutMyMeetupsInput {
+  create?: UserCreateWithoutMyMeetupsInput;
+  update?: UserUpdateWithoutMyMeetupsDataInput;
+  upsert?: UserUpsertWithoutMyMeetupsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface MeetupUpdateManyMutationInput {
+  title?: String;
+  description?: String;
+  location?: String;
+  date?: DateTimeInput;
+}
+
+export interface MeetupUpsertWithWhereUniqueWithoutOrganizerInput {
+  where: MeetupWhereUniqueInput;
+  update: MeetupUpdateWithoutOrganizerDataInput;
+  create: MeetupCreateWithoutOrganizerInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
+export interface MeetupUpdateManyWithoutAttendeesInput {
+  create?:
+    | MeetupCreateWithoutAttendeesInput[]
+    | MeetupCreateWithoutAttendeesInput;
+  delete?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
+  connect?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
+  disconnect?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
   update?:
-    | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    | PostUpdateWithWhereUniqueWithoutAuthorInput;
+    | MeetupUpdateWithWhereUniqueWithoutAttendeesInput[]
+    | MeetupUpdateWithWhereUniqueWithoutAttendeesInput;
   upsert?:
-    | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    | PostUpsertWithWhereUniqueWithoutAuthorInput;
-  deleteMany?: PostScalarWhereInput[] | PostScalarWhereInput;
+    | MeetupUpsertWithWhereUniqueWithoutAttendeesInput[]
+    | MeetupUpsertWithWhereUniqueWithoutAttendeesInput;
+  deleteMany?: MeetupScalarWhereInput[] | MeetupScalarWhereInput;
   updateMany?:
-    | PostUpdateManyWithWhereNestedInput[]
-    | PostUpdateManyWithWhereNestedInput;
+    | MeetupUpdateManyWithWhereNestedInput[]
+    | MeetupUpdateManyWithWhereNestedInput;
 }
 
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput;
-  create: UserCreateWithoutPostsInput;
+export interface UserScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  email?: String;
+  email_not?: String;
+  email_in?: String[] | String;
+  email_not_in?: String[] | String;
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: UserScalarWhereInput[] | UserScalarWhereInput;
+  OR?: UserScalarWhereInput[] | UserScalarWhereInput;
+  NOT?: UserScalarWhereInput[] | UserScalarWhereInput;
+}
+
+export interface MeetupUpdateWithWhereUniqueWithoutAttendeesInput {
+  where: MeetupWhereUniqueInput;
+  data: MeetupUpdateWithoutAttendeesDataInput;
+}
+
+export interface UserCreateOneWithoutMyMeetupsInput {
+  create?: UserCreateWithoutMyMeetupsInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export interface UserWhereInput {
@@ -278,44 +505,40 @@ export interface UserWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
-  posts_every?: PostWhereInput;
-  posts_some?: PostWhereInput;
-  posts_none?: PostWhereInput;
+  myMeetups_every?: MeetupWhereInput;
+  myMeetups_some?: MeetupWhereInput;
+  myMeetups_none?: MeetupWhereInput;
+  meetupsAttending_every?: MeetupWhereInput;
+  meetupsAttending_some?: MeetupWhereInput;
+  meetupsAttending_none?: MeetupWhereInput;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface PostSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: PostWhereInput;
-  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
-  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
-  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
+export interface MeetupCreateManyWithoutAttendeesInput {
+  create?:
+    | MeetupCreateWithoutAttendeesInput[]
+    | MeetupCreateWithoutAttendeesInput;
+  connect?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
 }
 
-export interface PostCreateInput {
-  published?: Boolean;
-  title: String;
-  content: String;
-  author: UserCreateOneWithoutPostsInput;
-}
-
-export interface PostUpdateManyDataInput {
-  published?: Boolean;
+export interface MeetupUpdateWithoutOrganizerDataInput {
   title?: String;
-  content?: String;
+  description?: String;
+  location?: String;
+  date?: DateTimeInput;
+  attendees?: UserUpdateManyWithoutMeetupsAttendingInput;
 }
 
-export interface UserCreateOneWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput;
-  connect?: UserWhereUniqueInput;
+export interface UserCreateManyWithoutMeetupsAttendingInput {
+  create?:
+    | UserCreateWithoutMeetupsAttendingInput[]
+    | UserCreateWithoutMeetupsAttendingInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
 }
 
-export interface PostScalarWhereInput {
+export interface MeetupScalarWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -330,24 +553,6 @@ export interface PostScalarWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  published?: Boolean;
-  published_not?: Boolean;
   title?: String;
   title_not?: String;
   title_in?: String[] | String;
@@ -362,116 +567,45 @@ export interface PostScalarWhereInput {
   title_not_starts_with?: String;
   title_ends_with?: String;
   title_not_ends_with?: String;
-  content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
-  AND?: PostScalarWhereInput[] | PostScalarWhereInput;
-  OR?: PostScalarWhereInput[] | PostScalarWhereInput;
-  NOT?: PostScalarWhereInput[] | PostScalarWhereInput;
-}
-
-export interface UserCreateWithoutPostsInput {
-  email: String;
-  password: String;
-  name: String;
-}
-
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput;
-  update: PostUpdateWithoutAuthorDataInput;
-  create: PostCreateWithoutAuthorInput;
-}
-
-export interface PostUpdateInput {
-  published?: Boolean;
-  title?: String;
-  content?: String;
-  author?: UserUpdateOneRequiredWithoutPostsInput;
-}
-
-export interface PostWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  published?: Boolean;
-  published_not?: Boolean;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  content?: String;
-  content_not?: String;
-  content_in?: String[] | String;
-  content_not_in?: String[] | String;
-  content_lt?: String;
-  content_lte?: String;
-  content_gt?: String;
-  content_gte?: String;
-  content_contains?: String;
-  content_not_contains?: String;
-  content_starts_with?: String;
-  content_not_starts_with?: String;
-  content_ends_with?: String;
-  content_not_ends_with?: String;
-  author?: UserWhereInput;
-  AND?: PostWhereInput[] | PostWhereInput;
-  OR?: PostWhereInput[] | PostWhereInput;
-  NOT?: PostWhereInput[] | PostWhereInput;
-}
-
-export interface UserUpdateInput {
-  email?: String;
-  password?: String;
-  name?: String;
-  posts?: PostUpdateManyWithoutAuthorInput;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
+  location?: String;
+  location_not?: String;
+  location_in?: String[] | String;
+  location_not_in?: String[] | String;
+  location_lt?: String;
+  location_lte?: String;
+  location_gt?: String;
+  location_gte?: String;
+  location_contains?: String;
+  location_not_contains?: String;
+  location_starts_with?: String;
+  location_not_starts_with?: String;
+  location_ends_with?: String;
+  location_not_ends_with?: String;
+  date?: DateTimeInput;
+  date_not?: DateTimeInput;
+  date_in?: DateTimeInput[] | DateTimeInput;
+  date_not_in?: DateTimeInput[] | DateTimeInput;
+  date_lt?: DateTimeInput;
+  date_lte?: DateTimeInput;
+  date_gt?: DateTimeInput;
+  date_gte?: DateTimeInput;
+  AND?: MeetupScalarWhereInput[] | MeetupScalarWhereInput;
+  OR?: MeetupScalarWhereInput[] | MeetupScalarWhereInput;
+  NOT?: MeetupScalarWhereInput[] | MeetupScalarWhereInput;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -480,32 +614,120 @@ export interface UserUpdateManyMutationInput {
   name?: String;
 }
 
-export interface PostCreateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
+export interface MeetupUpdateManyWithWhereNestedInput {
+  where: MeetupScalarWhereInput;
+  data: MeetupUpdateManyDataInput;
 }
 
-export interface PostUpdateManyMutationInput {
-  published?: Boolean;
-  title?: String;
-  content?: String;
-}
-
-export interface PostCreateWithoutAuthorInput {
-  published?: Boolean;
-  title: String;
-  content: String;
-}
-
-export interface UserUpdateWithoutPostsDataInput {
+export interface UserUpdateManyDataInput {
   email?: String;
   password?: String;
   name?: String;
 }
 
-export interface PostUpdateManyWithWhereNestedInput {
-  where: PostScalarWhereInput;
-  data: PostUpdateManyDataInput;
+export interface MeetupUpdateManyDataInput {
+  title?: String;
+  description?: String;
+  location?: String;
+  date?: DateTimeInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutMeetupsAttendingInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutMeetupsAttendingDataInput;
+  create: UserCreateWithoutMeetupsAttendingInput;
+}
+
+export interface UserUpsertWithoutMyMeetupsInput {
+  update: UserUpdateWithoutMyMeetupsDataInput;
+  create: UserCreateWithoutMyMeetupsInput;
+}
+
+export interface UserCreateWithoutMyMeetupsInput {
+  email: String;
+  password: String;
+  name: String;
+  meetupsAttending?: MeetupCreateManyWithoutAttendeesInput;
+}
+
+export interface MeetupUpdateManyWithoutOrganizerInput {
+  create?:
+    | MeetupCreateWithoutOrganizerInput[]
+    | MeetupCreateWithoutOrganizerInput;
+  delete?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
+  connect?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
+  disconnect?: MeetupWhereUniqueInput[] | MeetupWhereUniqueInput;
+  update?:
+    | MeetupUpdateWithWhereUniqueWithoutOrganizerInput[]
+    | MeetupUpdateWithWhereUniqueWithoutOrganizerInput;
+  upsert?:
+    | MeetupUpsertWithWhereUniqueWithoutOrganizerInput[]
+    | MeetupUpsertWithWhereUniqueWithoutOrganizerInput;
+  deleteMany?: MeetupScalarWhereInput[] | MeetupScalarWhereInput;
+  updateMany?:
+    | MeetupUpdateManyWithWhereNestedInput[]
+    | MeetupUpdateManyWithWhereNestedInput;
+}
+
+export interface UserUpdateWithoutMeetupsAttendingDataInput {
+  email?: String;
+  password?: String;
+  name?: String;
+  myMeetups?: MeetupUpdateManyWithoutOrganizerInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutMeetupsAttendingInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutMeetupsAttendingDataInput;
+}
+
+export interface UserUpdateManyWithoutMeetupsAttendingInput {
+  create?:
+    | UserCreateWithoutMeetupsAttendingInput[]
+    | UserCreateWithoutMeetupsAttendingInput;
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput;
+  update?:
+    | UserUpdateWithWhereUniqueWithoutMeetupsAttendingInput[]
+    | UserUpdateWithWhereUniqueWithoutMeetupsAttendingInput;
+  upsert?:
+    | UserUpsertWithWhereUniqueWithoutMeetupsAttendingInput[]
+    | UserUpsertWithWhereUniqueWithoutMeetupsAttendingInput;
+  deleteMany?: UserScalarWhereInput[] | UserScalarWhereInput;
+  updateMany?:
+    | UserUpdateManyWithWhereNestedInput[]
+    | UserUpdateManyWithWhereNestedInput;
+}
+
+export interface MeetupCreateWithoutAttendeesInput {
+  organizer: UserCreateOneWithoutMyMeetupsInput;
+  title: String;
+  description: String;
+  location: String;
+  date: DateTimeInput;
+}
+
+export interface MeetupCreateInput {
+  organizer: UserCreateOneWithoutMyMeetupsInput;
+  title: String;
+  description: String;
+  location: String;
+  date: DateTimeInput;
+  attendees?: UserCreateManyWithoutMeetupsAttendingInput;
+}
+
+export interface UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput;
+  data: UserUpdateManyDataInput;
+}
+
+export interface UserCreateInput {
+  email: String;
+  password: String;
+  name: String;
+  myMeetups?: MeetupCreateManyWithoutOrganizerInput;
+  meetupsAttending?: MeetupCreateManyWithoutAttendeesInput;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -518,17 +740,6 @@ export interface UserSubscriptionWhereInput {
   OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
   NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
-
-export interface PostUpdateWithoutAuthorDataInput {
-  published?: Boolean;
-  title?: String;
-  content?: String;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  email?: String;
-}>;
 
 export interface NodeNode {
   id: ID_Output;
@@ -559,101 +770,6 @@ export interface UserPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PostPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  published: Boolean;
-  title: String;
-  content: String;
-}
-
-export interface PostPreviousValuesPromise
-  extends Promise<PostPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
-}
-
-export interface PostPreviousValuesSubscription
-  extends Promise<AsyncIterator<PostPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  published: () => Promise<AsyncIterator<Boolean>>;
-  title: () => Promise<AsyncIterator<String>>;
-  content: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Post {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  published: Boolean;
-  title: String;
-  content: String;
-}
-
-export interface PostPromise extends Promise<Post>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  title: () => Promise<String>;
-  content: () => Promise<String>;
-  author: <T = UserPromise>() => T;
-}
-
-export interface PostSubscription
-  extends Promise<AsyncIterator<Post>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  published: () => Promise<AsyncIterator<Boolean>>;
-  title: () => Promise<AsyncIterator<String>>;
-  content: () => Promise<AsyncIterator<String>>;
-  author: <T = UserSubscription>() => T;
-}
-
-export interface AggregatePost {
-  count: Int;
-}
-
-export interface AggregatePostPromise
-  extends Promise<AggregatePost>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregatePostSubscription
-  extends Promise<AsyncIterator<AggregatePost>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PostEdge {
-  node: Post;
-  cursor: String;
-}
-
-export interface PostEdgePromise extends Promise<PostEdge>, Fragmentable {
-  node: <T = PostPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface PostEdgeSubscription
-  extends Promise<AsyncIterator<PostEdge>>,
-    Fragmentable {
-  node: <T = PostSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -679,50 +795,212 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface PostSubscriptionPayload {
+export interface MeetupSubscriptionPayload {
   mutation: MutationType;
-  node: Post;
+  node: Meetup;
   updatedFields: String[];
-  previousValues: PostPreviousValues;
+  previousValues: MeetupPreviousValues;
 }
 
-export interface PostSubscriptionPayloadPromise
-  extends Promise<PostSubscriptionPayload>,
+export interface MeetupSubscriptionPayloadPromise
+  extends Promise<MeetupSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = PostPromise>() => T;
+  node: <T = MeetupPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = PostPreviousValuesPromise>() => T;
+  previousValues: <T = MeetupPreviousValuesPromise>() => T;
 }
 
-export interface PostSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PostSubscriptionPayload>>,
+export interface MeetupSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MeetupSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PostSubscription>() => T;
+  node: <T = MeetupSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PostPreviousValuesSubscription>() => T;
+  previousValues: <T = MeetupPreviousValuesSubscription>() => T;
 }
 
-export interface PostConnection {
+export interface MeetupPreviousValues {
+  id: ID_Output;
+  title: String;
+  description: String;
+  location: String;
+  date: DateTimeOutput;
+}
+
+export interface MeetupPreviousValuesPromise
+  extends Promise<MeetupPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  location: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+}
+
+export interface MeetupPreviousValuesSubscription
+  extends Promise<AsyncIterator<MeetupPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  location: () => Promise<AsyncIterator<String>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Meetup {
+  id: ID_Output;
+  title: String;
+  description: String;
+  location: String;
+  date: DateTimeOutput;
+}
+
+export interface MeetupPromise extends Promise<Meetup>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  organizer: <T = UserPromise>() => T;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  location: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+  attendees: <T = FragmentableArray<User>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface MeetupSubscription
+  extends Promise<AsyncIterator<Meetup>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  organizer: <T = UserSubscription>() => T;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  location: () => Promise<AsyncIterator<String>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  attendees: <T = Promise<AsyncIterator<UserSubscription>>>(
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface User {
+  id: ID_Output;
+  email: String;
+  password: String;
+  name: String;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  name: () => Promise<String>;
+  myMeetups: <T = FragmentableArray<Meetup>>(
+    args?: {
+      where?: MeetupWhereInput;
+      orderBy?: MeetupOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  meetupsAttending: <T = FragmentableArray<Meetup>>(
+    args?: {
+      where?: MeetupWhereInput;
+      orderBy?: MeetupOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  myMeetups: <T = Promise<AsyncIterator<MeetupSubscription>>>(
+    args?: {
+      where?: MeetupWhereInput;
+      orderBy?: MeetupOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  meetupsAttending: <T = Promise<AsyncIterator<MeetupSubscription>>>(
+    args?: {
+      where?: MeetupWhereInput;
+      orderBy?: MeetupOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface MeetupConnection {
   pageInfo: PageInfo;
-  edges: PostEdge[];
+  edges: MeetupEdge[];
 }
 
-export interface PostConnectionPromise
-  extends Promise<PostConnection>,
+export interface MeetupConnectionPromise
+  extends Promise<MeetupConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PostEdge>>() => T;
-  aggregate: <T = AggregatePostPromise>() => T;
+  edges: <T = FragmentableArray<MeetupEdge>>() => T;
+  aggregate: <T = AggregateMeetupPromise>() => T;
 }
 
-export interface PostConnectionSubscription
-  extends Promise<AsyncIterator<PostConnection>>,
+export interface MeetupConnectionSubscription
+  extends Promise<AsyncIterator<MeetupConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PostEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePostSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MeetupEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMeetupSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -748,83 +1026,6 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface User {
-  id: ID_Output;
-  email: String;
-  password: String;
-  name: String;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  name: () => Promise<String>;
-  posts: <T = FragmentableArray<Post>>(
-    args?: {
-      where?: PostWhereInput;
-      orderBy?: PostOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  posts: <T = Promise<AsyncIterator<PostSubscription>>>(
-    args?: {
-      where?: PostWhereInput;
-      orderBy?: PostOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
 export interface UserConnection {
   pageInfo: PageInfo;
   edges: UserEdge[];
@@ -846,35 +1047,70 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface UserEdge {
-  node: User;
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface MeetupEdge {
+  node: Meetup;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface MeetupEdgePromise extends Promise<MeetupEdge>, Fragmentable {
+  node: <T = MeetupPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface MeetupEdgeSubscription
+  extends Promise<AsyncIterator<MeetupEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = MeetupSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export interface AggregateMeetup {
+  count: Int;
+}
 
-export type Long = string;
+export interface AggregateMeetupPromise
+  extends Promise<AggregateMeetup>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
 
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
+export interface AggregateMeetupSubscription
+  extends Promise<AsyncIterator<AggregateMeetup>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -892,9 +1128,22 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+export type Long = string;
+
+/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /**
  * Model Metadata
@@ -902,7 +1151,7 @@ export type Int = number;
 
 export const models: Model[] = [
   {
-    name: "Post",
+    name: "Meetup",
     embedded: false
   },
   {

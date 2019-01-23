@@ -5,7 +5,7 @@ var typeDefs = require("./prisma-schema").typeDefs;
 
 var models = [
   {
-    name: "Post",
+    name: "Meetup",
     embedded: false
   },
   {
@@ -16,6 +16,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/public-creamsinger-157/techies/dev`
+  endpoint: `http://localhost:4466/techies/dev`
 });
 exports.prisma = new exports.Prisma();
