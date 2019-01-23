@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import Router from 'next/router';
+import Link from 'next/link';
 
 import { LOGIN_MUTATION } from '../../graphql/mutations';
 
@@ -24,7 +25,7 @@ class Login extends Component {
       });
 
       localStorage.setItem('USER_TOKEN', response.data.login.token);
-      Router.replace('/');
+      Router.push('/');
     } catch (error) {
       throw new Error(error);
     }
@@ -34,15 +35,15 @@ class Login extends Component {
     return (
       <Mutation mutation={LOGIN_MUTATION}>
         {login => (
-          <div class="ui stackable three column centered grid container">
-            <div class="column">
-              <h3 class="ui horizontal divider header">Log In</h3>
+          <div className="ui stackable three column centered grid container">
+            <div className="column">
+              <h3 className="ui horizontal divider header">Log In</h3>
               <form
-                class="ui form"
+                className="ui form"
                 method="POST"
-                onSubmit={() => this.onLogin(e, login)}
+                onSubmit={e => this.onSubmit(e, login)}
               >
-                <div class="field">
+                <div className="field">
                   <label>Email address</label>
                   <input
                     type="email"
@@ -50,9 +51,8 @@ class Login extends Component {
                     onChange={this.onChange}
                     required
                   />
-                  >
                 </div>
-                <div class="field">
+                <div className="field">
                   <label>Password</label>
                   <input
                     type="password"
@@ -60,15 +60,16 @@ class Login extends Component {
                     onChange={this.onChange}
                     required
                   />
-                  >
                 </div>
-                <button class="fluid ui primary button">Log In</button>
+                <button className="fluid ui primary button">Log In</button>
               </form>
-              <div class="ui divider" />
-              <div class="ui column grid">
-                <div class="center aligned column">
+              <div className="ui divider" />
+              <div className="ui column grid">
+                <div className="center aligned column">
                   Don't have an account?{' '}
-                  <router-link to="/signup">Sign Up</router-link>
+                  <Link href="/signup">
+                    <a>Sign Up</a>
+                  </Link>
                 </div>
               </div>
             </div>

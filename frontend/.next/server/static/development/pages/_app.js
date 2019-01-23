@@ -136,7 +136,7 @@ function create(initialState, _ref) {
     var token = getToken();
     return {
       headers: _objectSpread({}, headers, {
-        authorization: token ? "Bearer ".concat(token) : ''
+        Authorization: token ? "Bearer ".concat(token) : ''
       })
     };
   }); // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
@@ -255,7 +255,7 @@ function parseCookies(req) {
                   Component = ctx.Component, router = ctx.router, _ctx$ctx = ctx.ctx, req = _ctx$ctx.req, res = _ctx$ctx.res;
                   apollo = Object(_initApollo__WEBPACK_IMPORTED_MODULE_6__["default"])({}, {
                     getToken: function getToken() {
-                      return parseCookies(req).token;
+                      return localStorage.getItem('USER_TOKEN');
                     }
                   });
                   ctx.ctx.apolloClient = apollo;
@@ -346,7 +346,7 @@ function parseCookies(req) {
 
       _this.apolloClient = Object(_initApollo__WEBPACK_IMPORTED_MODULE_6__["default"])(props.apolloState, {
         getToken: function getToken() {
-          return parseCookies().token;
+          return localStorage.getItem('USER_TOKEN');
         }
       });
       return _this;

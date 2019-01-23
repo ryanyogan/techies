@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -202,145 +202,35 @@ var Layout = function Layout(_ref) {
 
 /***/ }),
 
-/***/ "./components/Meetup/index.js":
-/*!************************************!*\
-  !*** ./components/Meetup/index.js ***!
-  \************************************/
+/***/ "./components/NewMeetup/index.js":
+/*!***************************************!*\
+  !*** ./components/NewMeetup/index.js ***!
+  \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "next/link");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "moment");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/Users/ryanyogan/personal/techies/frontend/components/Meetup/index.js";
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-apollo */ "react-apollo");
+/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _graphql_mutations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../graphql/mutations */ "./graphql/mutations.js");
+/* harmony import */ var _graphql_queries__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../graphql/queries */ "./graphql/queries.js");
 
-
-
-
-var Meetup = function Meetup(_ref) {
-  var meetups = _ref.meetups;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "ui divided items",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6
-    },
-    __self: this
-  }, meetups.map(function (meetup, idx) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "item",
-      key: idx,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 8
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "content",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 9
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-      className: "header",
-      href: meetup.id,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 10
-      },
-      __self: this
-    }, meetup.title), meetup.organizer && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "meta",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 14
-      },
-      __self: this
-    }, "Organized by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 15
-      },
-      __self: this
-    }, meetup.organizer.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "description",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 18
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 19
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "calendar icon",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 20
-      },
-      __self: this
-    }), ' ', moment__WEBPACK_IMPORTED_MODULE_2___default()(meetup.date, 'dddd, MMMM Do YYYY, hA')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 23
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "map marker alternate icon",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 24
-      },
-      __self: this
-    }), " ", meetup.location)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "extra",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 27
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "thumbs up icon",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 28
-      },
-      __self: this
-    }), meetup.attendees && meetup.attendees.length <= 1 ? "".concat(meetup.attendees.length, " attendee going") : "".concat(meetup.attendees.length, " attendees going"))));
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Meetup);
-
-/***/ }),
-
-/***/ "./components/Menu/index.js":
-/*!**********************************!*\
-  !*** ./components/Menu/index.js ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "next/link");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/Users/ryanyogan/personal/techies/frontend/components/Menu/index.js";
+var _jsxFileName = "/Users/ryanyogan/personal/techies/frontend/components/NewMeetup/index.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -364,199 +254,296 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Menu =
+
+
+var NewMeetup =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Menu, _Component);
+  _inherits(NewMeetup, _Component);
 
-  function Menu() {
+  function NewMeetup() {
     var _getPrototypeOf2;
 
     var _this;
 
-    _classCallCheck(this, Menu);
+    _classCallCheck(this, NewMeetup);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Menu)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(NewMeetup)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "logOut", function () {
-      localStorage.removeItem('USER_TOKEN');
-      next_router__WEBPACK_IMPORTED_MODULE_1___default.a.push('/login');
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      title: '',
+      description: '',
+      location: '',
+      date: ''
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "isAuthenticated", function () {
-      return !!localStorage.getItem('USER_TOKEN');
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onChange", function (e) {
+      return _this.setState(_defineProperty({}, e.target.name, e.target.value));
     });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onSubmit",
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e, createMeetup) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                e.preventDefault();
+                _context.prev = 1;
+                _context.next = 4;
+                return createMeetup({
+                  variables: _objectSpread({}, _this.state),
+                  update: function update(store, _ref2) {
+                    var createMeetup = _ref2.data.createMeetup;
+                    var data = store.readQuery({
+                      query: _graphql_queries__WEBPACK_IMPORTED_MODULE_5__["MEETUPS_QUERY"]
+                    });
+                    data.meetups.push(createMeetup);
+                    store.writeQuery({
+                      query: _graphql_queries__WEBPACK_IMPORTED_MODULE_5__["MEETUPS_QUERY"],
+                      data: data
+                    });
+                  }
+                });
+
+              case 4:
+                next_router__WEBPACK_IMPORTED_MODULE_3___default.a.push('/');
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](1);
+                console.log(_context.t0);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[1, 7]]);
+      }));
+
+      return function (_x, _x2) {
+        return _ref.apply(this, arguments);
+      };
+    }());
 
     return _this;
   }
 
-  _createClass(Menu, [{
+  _createClass(NewMeetup, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "ui vertical menu",
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_2__["Mutation"], {
+        mutation: _graphql_mutations__WEBPACK_IMPORTED_MODULE_4__["CREATE_MEETUP_MUTATION"],
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15
+          lineNumber: 41
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        href: "/",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 16
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "item",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 17
-        },
-        __self: this
-      }, "All Meetups")), this.isAuthenticated && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 21
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        href: "/my-meetups",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 22
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "item",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 23
-        },
-        __self: this
-      }, "My Meetups")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        href: "/meetups-going",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 25
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "item",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 26
-        },
-        __self: this
-      }, "I'm going")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "ui item",
-        onClick: this.logOut,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 28
-        },
-        __self: this
-      }, "Logout")));
+      }, function (createMeetup) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "ui stackable two column centered grid container",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 43
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "column",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 44
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+          className: "ui horizontal divider header",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 45
+          },
+          __self: this
+        }, "Create Meetup"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+          className: "ui form",
+          method: "POST",
+          onSubmit: function onSubmit(e) {
+            return _this2.onSubmit(e, createMeetup);
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 46
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "field",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 51
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 52
+          },
+          __self: this
+        }, "Title"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "text",
+          name: "title",
+          onChange: _this2.onChange,
+          required: true,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 53
+          },
+          __self: this
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "field",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 60
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 61
+          },
+          __self: this
+        }, "Location"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "text",
+          name: "location",
+          onChange: _this2.onChange,
+          required: true,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 62
+          },
+          __self: this
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "field",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 69
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 70
+          },
+          __self: this
+        }, "Date"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "datetime-local",
+          name: "date",
+          onChange: _this2.onChange,
+          required: true,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 71
+          },
+          __self: this
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "field",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 78
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 79
+          },
+          __self: this
+        }, "Description"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+          name: "description",
+          rows: "10",
+          onChange: _this2.onChange,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 80
+          },
+          __self: this
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "ui primary button",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 86
+          },
+          __self: this
+        }, "Create Meetup"))));
+      });
     }
   }]);
 
-  return Menu;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  return NewMeetup;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Menu);
+/* harmony default export */ __webpack_exports__["default"] = (NewMeetup);
 
 /***/ }),
 
-/***/ "./components/MyMeetups/index.js":
-/*!***************************************!*\
-  !*** ./components/MyMeetups/index.js ***!
-  \***************************************/
-/*! exports provided: default */
+/***/ "./graphql/mutations.js":
+/*!******************************!*\
+  !*** ./graphql/mutations.js ***!
+  \******************************/
+/*! exports provided: SIGNUP_MUTATION, LOGIN_MUTATION, CREATE_MEETUP_MUTATION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-apollo */ "react-apollo");
-/* harmony import */ var react_apollo__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_apollo__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Meetup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Meetup */ "./components/Meetup/index.js");
-/* harmony import */ var _Menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Menu */ "./components/Menu/index.js");
-/* harmony import */ var _graphql_queries__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../graphql/queries */ "./graphql/queries.js");
-var _jsxFileName = "/Users/ryanyogan/personal/techies/frontend/components/MyMeetups/index.js";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGNUP_MUTATION", function() { return SIGNUP_MUTATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN_MUTATION", function() { return LOGIN_MUTATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_MEETUP_MUTATION", function() { return CREATE_MEETUP_MUTATION; });
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graphql-tag */ "graphql-tag");
+/* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_0__);
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  mutation CREATE_MEETUP_MUTATION(\n    $title: String!\n    $location: String!\n    $date: DateTime!\n    $description: String!\n  ) {\n    createMeetup(\n      title: $title\n      location: $location\n      date: $date\n      description: $description\n    ) {\n      id\n      title\n      date\n      location\n      organizer {\n        name\n      }\n      attendees {\n        id\n      }\n    }\n  }\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  mutation LOGIN_MUTATION($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      token\n    }\n  }\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  mutation SIGNUP_MUTATION(\n    $email: String!\n    $password: String!\n    $name: String!\n  ) {\n    signup(email: $email, password: $password, name: $name) {\n      token\n    }\n  }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
-
-
-
-
-var MyMeetups = function MyMeetups() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_1__["Query"], {
-    query: _graphql_queries__WEBPACK_IMPORTED_MODULE_4__["ME_QUERY"],
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9
-    },
-    __self: this
-  }, function (_ref) {
-    var data = _ref.data,
-        loading = _ref.loading;
-    return console.log(data) || react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "ui stackable relaxed grid container",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 12
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "twelve wide column",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 13
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-      className: "ui header",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 14
-      },
-      __self: this
-    }, "My Meetups"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "ui segment",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 15
-      },
-      __self: this
-    }, loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 16
-      },
-      __self: this
-    }, "Loading..."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "four wide column",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 20
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 21
-      },
-      __self: this
-    })));
-  });
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (MyMeetups);
+var SIGNUP_MUTATION = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject());
+var LOGIN_MUTATION = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject2());
+var CREATE_MEETUP_MUTATION = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject3());
 
 /***/ }),
 
@@ -601,21 +588,21 @@ var ME_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObjec
 
 /***/ }),
 
-/***/ "./pages/my-meetups.js":
-/*!*****************************!*\
-  !*** ./pages/my-meetups.js ***!
-  \*****************************/
+/***/ "./pages/create.js":
+/*!*************************!*\
+  !*** ./pages/create.js ***!
+  \*************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MyMeetupsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Index; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout/index.js");
-/* harmony import */ var _components_MyMeetups__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/MyMeetups */ "./components/MyMeetups/index.js");
-var _jsxFileName = "/Users/ryanyogan/personal/techies/frontend/pages/my-meetups.js";
+/* harmony import */ var _components_NewMeetup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/NewMeetup */ "./components/NewMeetup/index.js");
+var _jsxFileName = "/Users/ryanyogan/personal/techies/frontend/pages/create.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -639,18 +626,18 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var MyMeetupsPage =
+var Index =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(MyMeetupsPage, _React$Component);
+  _inherits(Index, _React$Component);
 
-  function MyMeetupsPage() {
-    _classCallCheck(this, MyMeetupsPage);
+  function Index() {
+    _classCallCheck(this, Index);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MyMeetupsPage).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(Index).apply(this, arguments));
   }
 
-  _createClass(MyMeetupsPage, [{
+  _createClass(Index, [{
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -659,7 +646,7 @@ function (_React$Component) {
           lineNumber: 8
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_MyMeetups__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_NewMeetup__WEBPACK_IMPORTED_MODULE_2__["default"], {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 9
@@ -669,22 +656,33 @@ function (_React$Component) {
     }
   }]);
 
-  return MyMeetupsPage;
+  return Index;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
 
 /***/ }),
 
-/***/ 4:
-/*!***********************************!*\
-  !*** multi ./pages/my-meetups.js ***!
-  \***********************************/
+/***/ 8:
+/*!*******************************!*\
+  !*** multi ./pages/create.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./pages/my-meetups.js */"./pages/my-meetups.js");
+module.exports = __webpack_require__(/*! ./pages/create.js */"./pages/create.js");
 
+
+/***/ }),
+
+/***/ "@babel/runtime/regenerator":
+/*!*********************************************!*\
+  !*** external "@babel/runtime/regenerator" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@babel/runtime/regenerator");
 
 /***/ }),
 
@@ -696,17 +694,6 @@ module.exports = __webpack_require__(/*! ./pages/my-meetups.js */"./pages/my-mee
 /***/ (function(module, exports) {
 
 module.exports = require("graphql-tag");
-
-/***/ }),
-
-/***/ "moment":
-/*!*************************!*\
-  !*** external "moment" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("moment");
 
 /***/ }),
 
@@ -755,4 +742,4 @@ module.exports = require("react-apollo");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=my-meetups.js.map
+//# sourceMappingURL=create.js.map

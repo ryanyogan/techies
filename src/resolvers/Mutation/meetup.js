@@ -1,24 +1,23 @@
-const { getUserId } = require("../../utils");
+const { getUserId } = require('../../utils');
 
 const meetup = {
   async createMeetup(_, { title, description, date, location }, ctx) {
     const userId = getUserId(ctx);
     return ctx.prisma.createMeetup({
       title,
-      content,
       date,
       description,
       location,
       organizer: {
-        connect: { id: userId }
-      }
+        connect: { id: userId },
+      },
     });
   },
 
   async attending(_, { id }, context) {
     const userId = getUserId(context);
     const meetupExists = await context.prisma.$exists.meetup({
-      id
+      id,
     });
     if (!meetupExists) {
       throw new Error(`Sorry, meetup not found!`);
@@ -29,17 +28,17 @@ const meetup = {
       data: {
         attendees: {
           connect: {
-            id: userId
-          }
-        }
-      }
+            id: userId,
+          },
+        },
+      },
     });
   },
 
   async notAttending(_, { id }, context) {
     const userId = getUserId(context);
     const meetupExists = await context.prisma.$exists.meetup({
-      id
+      id,
     });
     if (!meetupExists) {
       throw new Error(`Sorry, meetup not found!`);
@@ -50,12 +49,12 @@ const meetup = {
       data: {
         attendees: {
           disconnect: {
-            id: userId
-          }
-        }
-      }
+            id: userId,
+          },
+        },
+      },
     });
-  }
+  },
 };
 
 module.exports = { meetup };

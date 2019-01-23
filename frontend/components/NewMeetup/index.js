@@ -30,7 +30,7 @@ class NewMeetup extends Component {
         },
       });
 
-      Router.replace('/');
+      Router.push('/');
     } catch (error) {
       console.log(error);
     }
@@ -40,15 +40,15 @@ class NewMeetup extends Component {
     return (
       <Mutation mutation={CREATE_MEETUP_MUTATION}>
         {createMeetup => (
-          <div class="ui stackable two column centered grid container">
-            <div class="column">
-              <h3 class="ui horizontal divider header">Create Meetup</h3>
+          <div className="ui stackable two column centered grid container">
+            <div className="column">
+              <h3 className="ui horizontal divider header">Create Meetup</h3>
               <form
-                class="ui form"
+                className="ui form"
                 method="POST"
                 onSubmit={e => this.onSubmit(e, createMeetup)}
               >
-                <div class="field">
+                <div className="field">
                   <label>Title</label>
                   <input
                     type="text"
@@ -57,7 +57,7 @@ class NewMeetup extends Component {
                     required
                   />
                 </div>
-                <div class="field">
+                <div className="field">
                   <label>Location</label>
                   <input
                     type="text"
@@ -66,7 +66,7 @@ class NewMeetup extends Component {
                     required
                   />
                 </div>
-                <div class="field">
+                <div className="field">
                   <label>Date</label>
                   <input
                     type="datetime-local"
@@ -75,11 +75,15 @@ class NewMeetup extends Component {
                     required
                   />
                 </div>
-                <div class="field">
+                <div className="field">
                   <label>Description</label>
-                  <textarea name="description" rows="10" />
+                  <textarea
+                    name="description"
+                    rows="10"
+                    onChange={this.onChange}
+                  />
                 </div>
-                <button class="ui primary button">Create Meetup</button>
+                <button className="ui primary button">Create Meetup</button>
               </form>
             </div>
           </div>

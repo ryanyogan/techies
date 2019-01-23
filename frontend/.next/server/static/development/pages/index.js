@@ -355,60 +355,48 @@ var MeetupList = function MeetupList() {
     },
     __self: this
   }, function (_ref) {
-    var meetups = _ref.data.meetups,
+    var data = _ref.data,
         loading = _ref.loading;
+    console.log(data);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ui stackable relaxed grid container",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 11
+        lineNumber: 12
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "twelve wide column",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 13
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
       className: "ui header",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 14
       },
       __self: this
     }, "All Meetups"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "ui segment",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
-      },
-      __self: this
-    }, loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      __source: {
-        fileName: _jsxFileName,
         lineNumber: 15
       },
       __self: this
-    }, "Loading..."), meetups && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Meetup__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      meetups: meetups,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 16
-      },
-      __self: this
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "four wide column",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 20
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Menu__WEBPACK_IMPORTED_MODULE_3__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 21
       },
       __self: this
     })));
