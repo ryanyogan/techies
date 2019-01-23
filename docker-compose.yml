@@ -7,7 +7,7 @@ services:
       - "4466:4466"
     environment:
       PRISMA_CONFIG: |
-        managementApiSecret: foobar123123
+        # managementApiSecret: foobar123123
         port: 4466
         databases:
           default:
@@ -15,8 +15,6 @@ services:
             host: mysql
             user: root
             password: prisma
-            migrations: true
-            rawAccess: true
             port: 3306
 
   mysql:

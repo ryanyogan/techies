@@ -16,6 +16,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466/techies/dev`
+  endpoint: `https://us1.prisma.sh/ryan-yogan/techies/dev`
 });
 exports.prisma = new exports.Prisma();
