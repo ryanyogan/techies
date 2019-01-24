@@ -1,14 +1,22 @@
-import React, { Component, Fragment } from 'react';
-import Router from 'next/router';
-import Link from 'next/link';
+import React, { Component, Fragment } from "react";
+import Router from "next/router";
+import Link from "next/link";
 
 class Menu extends Component {
-  logOut = () => {
-    localStorage.removeItem('USER_TOKEN');
-    Router.push('/login');
+  state = {
+    isAuthenticated: false,
   };
 
-  isAuthenticated = () => !!localStorage.getItem('USER_TOKEN');
+  logOut = () => {
+    localStorage.removeItem("USER_TOKEN");
+    Router.push("/login");
+  };
+
+  componentDidMount() {
+    this.setState({
+      isAuthenticated: !!localStorage.getItem("USER_TOKEN"),
+    });
+  }
 
   render() {
     return (
@@ -17,7 +25,7 @@ class Menu extends Component {
           <a className="item">All Meetups</a>
         </Link>
 
-        {this.isAuthenticated && (
+        {this.state.isAuthenticated && (
           <Fragment>
             <Link href="/my-meetups">
               <a className="item">My Meetups</a>

@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import Router from 'next/router';
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import Router from "next/router";
 
-import { CREATE_MEETUP_MUTATION } from '../../graphql/mutations';
-import { MEETUPS_QUERY } from '../../graphql/queries';
+import { CREATE_MEETUP_MUTATION } from "../../graphql/mutations";
+import { MEETUPS_QUERY } from "../../graphql/queries";
 
 class NewMeetup extends Component {
   state = {
-    title: '',
-    description: '',
-    location: '',
-    date: '',
+    title: "",
+    description: "",
+    location: "",
+    date: "",
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = (e: any) => this.setState({ [e.target.name]: e.target.value });
 
-  onSubmit = async (e, createMeetup) => {
+  onSubmit = async (e: any, createMeetup: any) => {
     e.preventDefault();
 
     try {
@@ -23,14 +23,14 @@ class NewMeetup extends Component {
         variables: {
           ...this.state,
         },
-        update: (store, { data: { createMeetup } }) => {
+        update: (store: any, { data: { createMeetup } }: any) => {
           const data = store.readQuery({ query: MEETUPS_QUERY });
           data.meetups.push(createMeetup);
           store.writeQuery({ query: MEETUPS_QUERY, data });
         },
       });
 
-      Router.push('/');
+      Router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +79,7 @@ class NewMeetup extends Component {
                   <label>Description</label>
                   <textarea
                     name="description"
-                    rows="10"
+                    rows={10}
                     onChange={this.onChange}
                   />
                 </div>

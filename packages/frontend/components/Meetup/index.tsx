@@ -1,14 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
-import moment from 'moment';
+import React from "react";
+import Link from "next/link";
+import moment from "moment";
 
-const Meetup = ({ meetups }) => (
+const Meetup = ({ meetups }: any) => (
   <div className="ui divided items">
-    {meetups.map((meetup, idx) => (
+    {meetups.map((meetup: any, idx: number) => (
       <div className="item" key={idx}>
         <div className="content">
-          <Link className="header" href={meetup.id}>
-            {meetup.title}
+          <Link href={meetup.id}>
+            <a className="header">{meetup.title}</a>
           </Link>
           {meetup.organizer && (
             <div className="meta">
@@ -17,8 +17,8 @@ const Meetup = ({ meetups }) => (
           )}
           <div className="description">
             <span>
-              <i className="calendar icon" />{' '}
-              {moment(meetup.date, 'dddd, MMMM Do YYYY, hA')}
+              <i className="calendar icon" />{" "}
+              {moment(meetup.date).format("dddd, MMMM Do YYYY, hA")}
             </span>
             <span>
               <i className="map marker alternate icon" /> {meetup.location}

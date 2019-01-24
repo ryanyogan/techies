@@ -1,6 +1,6 @@
 const withTypescript = require("@zeit/next-typescript");
 
-module.exports = {
+const wfs = {
   webpack: config => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
@@ -11,4 +11,6 @@ module.exports = {
   },
 };
 
-module.exports = withTypescript();
+module.exports = withTypescript({
+  ...wfs,
+});

@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import Router from 'next/router';
-import Link from 'next/link';
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import Router from "next/router";
+import Link from "next/link";
 
-import { LOGIN_MUTATION } from '../../graphql/mutations';
+import { LOGIN_MUTATION } from "../../graphql/mutations";
 
 class Login extends Component {
   state = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = (e: any) => this.setState({ [e.target.name]: e.target.value });
 
-  onSubmit = async (e, login) => {
+  onSubmit = async (e: any, login: any) => {
     e.preventDefault();
 
     try {
@@ -24,8 +24,8 @@ class Login extends Component {
         },
       });
 
-      localStorage.setItem('USER_TOKEN', response.data.login.token);
-      Router.push('/');
+      localStorage.setItem("USER_TOKEN", response.data.login.token);
+      Router.push("/");
     } catch (error) {
       throw new Error(error);
     }
@@ -66,7 +66,7 @@ class Login extends Component {
               <div className="ui divider" />
               <div className="ui column grid">
                 <div className="center aligned column">
-                  Don't have an account?{' '}
+                  Don't have an account?{" "}
                   <Link href="/signup">
                     <a>Sign Up</a>
                   </Link>

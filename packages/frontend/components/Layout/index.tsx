@@ -1,8 +1,8 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-const Layout = ({ children }) => (
-  <div className="app" style={{ backgroundColor: '#f9f9f9' }}>
+const Layout = ({ children }: any) => (
+  <div className="app" style={{ backgroundColor: "#f9f9f9" }}>
     <nav className="ui borderless menu">
       <div className="ui container">
         <div className="header item">
@@ -21,7 +21,7 @@ const Layout = ({ children }) => (
         </div>
       </div>
     </nav>
-    <div style={{ paddingTop: '30px', paddingBottom: '30px' }}>{children}</div>
+    <div style={{ paddingTop: "30px", paddingBottom: "30px" }}>{children}</div>
   </div>
 );
 
