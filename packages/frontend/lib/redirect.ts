@@ -1,6 +1,6 @@
-import Router from 'next/router';
+import Router from "next/router";
 
-export default (context, target) => {
+export default (context: any, target: any) => {
   if (context.res) {
     // server
     // 303: "See Other"
