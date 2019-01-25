@@ -10,8 +10,14 @@ export const Mutation: MutationResolvers.Type = {
     const password = await bcrypt.hash(args.password, 10);
     const user = await context.prisma.createUser({ ...args, password });
 
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET as any);
+    context.response.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24, // 1 Day
+    });
+
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET as any),
+      token,
       user,
     };
   },
@@ -25,8 +31,15 @@ export const Mutation: MutationResolvers.Type = {
     if (!passwordValid) {
       throw new Error("Invalid password");
     }
+
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET as any);
+    context.response.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24, // 1 Day
+    });
+
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET as any),
+      token,
       user,
     };
   },

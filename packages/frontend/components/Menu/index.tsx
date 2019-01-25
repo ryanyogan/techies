@@ -1,23 +1,11 @@
 import React, { Component, Fragment } from "react";
-import Router from "next/router";
 import Link from "next/link";
 
-class Menu extends Component {
-  state = {
-    isAuthenticated: false,
-  };
+interface Props {
+  authenticated: boolean;
+}
 
-  logOut = () => {
-    localStorage.removeItem("USER_TOKEN");
-    Router.push("/login");
-  };
-
-  componentDidMount() {
-    this.setState({
-      isAuthenticated: !!localStorage.getItem("USER_TOKEN"),
-    });
-  }
-
+class Menu extends Component<Props> {
   render() {
     return (
       <div className="ui vertical menu">
@@ -25,19 +13,15 @@ class Menu extends Component {
           <a className="item">All Meetups</a>
         </Link>
 
-        {this.state.isAuthenticated && (
-          <Fragment>
-            <Link href="/my-meetups">
-              <a className="item">My Meetups</a>
-            </Link>
-            <Link href="/meetups-going">
-              <a className="item">I'm going</a>
-            </Link>
-            <a className="ui item" onClick={this.logOut}>
-              Logout
-            </a>
-          </Fragment>
-        )}
+        <Fragment>
+          <Link href="/my-meetups">
+            <a className="item">My Meetups</a>
+          </Link>
+          <Link href="/meetups-going">
+            <a className="item">I'm going</a>
+          </Link>
+          <a className="ui item">Logout</a>
+        </Fragment>
       </div>
     );
   }

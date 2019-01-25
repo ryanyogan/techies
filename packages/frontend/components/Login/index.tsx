@@ -17,14 +17,8 @@ class Login extends Component {
     e.preventDefault();
 
     try {
-      const response = await login({
-        variables: {
-          email: this.state.email,
-          password: this.state.password,
-        },
-      });
+      await login();
 
-      localStorage.setItem("USER_TOKEN", response.data.login.token);
       Router.push("/");
     } catch (error) {
       throw new Error(error);
@@ -33,7 +27,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Mutation mutation={LOGIN_MUTATION}>
+      <Mutation mutation={LOGIN_MUTATION} variables={{ ...this.state }}>
         {login => (
           <div className="ui stackable three column centered grid container">
             <div className="column">
@@ -49,6 +43,7 @@ class Login extends Component {
                     type="email"
                     name="email"
                     onChange={this.onChange}
+                    value={this.state.email}
                     required
                   />
                 </div>
@@ -58,6 +53,7 @@ class Login extends Component {
                     type="password"
                     name="password"
                     onChange={this.onChange}
+                    value={this.state.password}
                     required
                   />
                 </div>

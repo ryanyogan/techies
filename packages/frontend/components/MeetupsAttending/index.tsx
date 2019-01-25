@@ -16,7 +16,7 @@ const MeetupsAttending = () => (
           </div>
         </div>
         <div className="four wide column">
-          <Menu />
+          <Menu authenticated={me} />
         </div>
       </div>
     )}

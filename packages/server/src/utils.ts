@@ -1,19 +1,11 @@
-import { verify } from "jsonwebtoken";
-
-interface Token {
-  userId: string;
-}
-
 interface Context {
   request: any;
+  response: any;
 }
 
 const getUserId = (context: Context) => {
-  const Authorization = context.request.get("Authorization");
-
-  if (Authorization) {
-    const token = Authorization.replace("Bearer ", "");
-    const { userId } = verify(token, process.env.APP_SECRET as any) as Token;
+  const { userId } = context.request;
+  if (userId) {
     return userId;
   }
 
